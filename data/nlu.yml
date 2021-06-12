@@ -124,7 +124,6 @@ nlu:
     - Am I eligible for business loan? 
     - How to register a loan? 
 
-- intent: loan_application
   
 - intent: get_started
   examples: |
@@ -154,4 +153,48 @@ nlu:
     - 934885
     - 400000
 
-- intent: 
+- intent: list_faq
+  examples: | 
+    - Know more about RHB SME financing
+    - list faq 
+
+- intent: faq_benefits
+  examples: |
+    - What are the benefits of SME Financial?
+    - What to I get from SME Financial?
+    - Why is it to choose RHB SME Financial?
+
+- intent: faq_doc
+  examples: |
+    - What are the document required?
+    - Do I need to prepare any kinds of document?
+    - What do I need to prepare for the application?
+
+- intent: faq_req
+  examples: |
+    - Am I eligible?
+    - What criteria needed?
+    - SME Financing loan application criteria
+
+- intent: faq_what's_SME_OF
+  examples: |
+    - What is SME?
+    - Can you explain more on SME?
+    - Elaborate more on RHB SME Financial
+
+- intent: faq_ppl_apply_onbehalf_comp
+  examples: |
+    - Who can apply on behalf for the company?
+    - People auhorized to apply on behalf company
+
+- intent: faq_diff_of_SME_OF
+  examples: |
+    - What make the difference of RHB SME compare to others?
+    - What special about on RHB SME Online Financing?
+    - How unique is RHB SME Online Financing compare to others?
+
+- intent: faq_more
+  examples: |
+    - More info
+    - Extra information
+    - Others 

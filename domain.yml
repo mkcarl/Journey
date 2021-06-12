@@ -19,6 +19,14 @@ intents:
   - give_number
   - give_yes_no
   - give_business_sector
+  - faq_benefits
+  - faq_doc
+  - faq_req  
+  - faq_what's_SME_OF
+  - faq_ppl_apply_onbehalf_comp
+  - faq_diff_of_SME_OF
+  - faq_more
+  - list_faq
 
 actions: 
   - action_hello_world
@@ -33,6 +41,8 @@ actions:
   - action_eligibility_immediate
   - action_print_slot
   - action_recommend_news
+  - action_show_loan_status
+  - action_remind_payment
 
 
 slots: 
@@ -134,8 +144,8 @@ responses:
           buttons: 
             - title: "Check loan eligibility"
               payload: check_eligibility 
-            - title: "Apply business loan"
-              payload: loan_application 
+            - title: "Know more about RHB SME financing"
+              payload: list_faq
             - title: "Check loan status"
               payload: loan_status 
             # - title: "Check applications status "
@@ -237,14 +247,53 @@ responses:
               payload: "No"
     
   utter_eligibility_result: 
-    - text: "Congrats, you may proceed with the loan application. Please download the RHB Financing (SME) Mobile App for a smoother application process!"
+    - text: "Congrats, you may proceed with the loan application. Please download the RHB Financing (SME) Mobile App for a smoother application process! https://www.rhbgroup.com/financingsmeapp/index.html#download"
     - text: "Sorry to inform that you are not currently eligible to apply for the loan."
 
   utter_recommend_news: 
     - text: "Hey, you might find this article interesting : \n*{news_title}* \nRead more from : {news_url}"
     - text: "Nice to meet you again. \n Hey, are you aware on {news_title} \n Know more from: {news_url}"
 
-  utter_
+  utter_faq_benefits:
+  - text: "1.It's Simple to apply with no collateral required \n
+          2.Flexible by getting financing up to RM1,000,000 & Payback within 6 ~ 84 months \n
+          3.Receive your funds fast within 5 working days"
+  
+  utter_faq_doc:
+  - text: "2 documents needed: \n
+          1.Most recent 6 months of main bank statment \n
+          2.Copies of all Copies of MyKad of all (directors/shareholders/proprietor/partners)"
+  
+  utter_faq_req:
+  - text: "Are you eligible for it? \n
+          1.Having bussiness operating for min 1year / applying for RHB BizPower Relief Financing & operating business of 2years \n
+          2.All Directors/Shareholders(company) or Owners/Partners(individuals) are Malaysians with Mykad \n3.Business model within wholesale, retail, manufacturing or business services sector"
+
+  utter_faq_what's_SME_OF:
+  - text: "RHB SME Online Financing is a term financing facility that the bank offers to help businesses fund their working capital needs.It's also an unsecured term financing and is calculated on a variable rate basis."
+
+  utter_faq_ppl_apply_onbehalf_comp:
+  - text: "Any individual working in the company/business may apply on behalf of the company/business, as long as the individual is legally authorized by Management team to represent the company/business in this matter."
+
+  utter_faq_diff_of_SME_OF:
+  - text: "Our aim is to provide simple financing, as quickly and transparently as possible at a competitive rate. Our system is simple, fast, fair and empowers you to manage and grow your business."
+
+  utter_faq_more:
+  - text: "See full view of FAQ here: https://smebanking.rhbgroup.com/apps/MYRHBSMECJ2S/1616070831090/desktopweb/web/localfiles/files/frequently_asked_questions.pdf \n
+           or Product Disclosure Sheet: https://smebanking.rhbgroup.com/apps/MYRHBSMECJ2S/1616070831090/desktopweb/web/localfiles/files/Product_Disclosure_Sheet.pdf"
+  
+  utter_list_faq:
+    - text: "What do you like to know more about?"
+      elements: 
+        - title: FAQ 
+          subtitle: Frequently asked questions
+          buttons: 
+            - title: "What's SME Online Financial"
+              payload: utter_faq_what's_SME_OF 
+            - title: "Benefit of SME Online Financial"
+              payload: utter_faq_benefits
+            - title: "More"
+              payload: faq_more
 
 
 session_config:

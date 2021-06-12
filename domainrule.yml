@@ -1,0 +1,73 @@
+intent:
+- faq_benefits
+- faq_doc
+- faq_req  
+- faq_what's_SME_OF
+- faq_ppl_apply_onbehalf_comp
+- faq_diff_of_SME_OF
+- faq_more
+
+response: 
+  utter_faq_benefits:
+  - text: "1.It's Simple to apply with no collateral required \n
+           2.Flexible by getting financing up to RM1,000,000 & Payback within 6 ~ 84 months \n
+           3.Receive your funds fast within 5 working days"
+  
+  utter_faq_doc:
+  - text: "2 documents needed: \n
+           1.Most recent 6 months of main bank statment \n
+           2.Copies of all Copies of MyKad of all (directors/shareholders/proprietor/partners)"
+  
+  utter_faq_req:
+  - text: "Are you eligible for it? \n
+           1.Having bussiness operating for min 1year / applying for RHB BizPower Relief Financing & operating business of 2years \n
+           2.All Directors/Shareholders(company) or Owners/Partners(individuals) are Malaysians with Mykad \n3.Business model within wholesale, retail, manufacturing or business services sector"
+
+  utter_faq_what's_SME_OF:
+  - text: "RHB SME Online Financing is a term financing facility that the bank offers to help businesses fund their working capital needs.It's also an unsecured term financing and is calculated on a variable rate basis."
+
+  utter_faq_ppl_apply_onbehalf_comp:
+  - text: "Any individual working in the company/business may apply on behalf of the company/business, as long as the individual is legally authorized by Management team to represent the company/business in this matter."
+
+  utter_faq_diff_of_SME_OF:
+  - text: "Our aim is to provide simple financing, as quickly and transparently as possible at a competitive rate. Our system is simple, fast, fair and empowers you to manage and grow your business."
+
+  utter_faq_more:
+  - text: "See full view of FAQ here: https://smebanking.rhbgroup.com/apps/MYRHBSMECJ2S/1616070831090/desktopweb/web/localfiles/files/frequently_asked_questions.pdf \n
+           or Product Disclosure Sheet: https://smebanking.rhbgroup.com/apps/MYRHBSMECJ2S/1616070831090/desktopweb/web/localfiles/files/Product_Disclosure_Sheet.pdf"
+
+rule:
+  - rule: FAQ Benefits of SME_OF
+    steps: 
+    - intent: faq_benefits
+    - action: utter_faq_benefits
+
+  - rule: FAQ Doc Required
+    steps: 
+    - intent: faq_doc
+    - action: utter_faq_doc
+
+  - rule: FAQ Apply Criteria
+    steps: 
+    - intent: faq_req 
+    - action: utter_faq_req
+
+  - rule: FAQ What's SME OF
+    steps: 
+    - intent: faq_what's_SME_OF
+    - action: utter_faq_what's_SME_OF
+
+  - rule: FAQ Who can apply on behalve Comp
+    steps: 
+    - intent: faq_ppl_apply_onbehalf_comp
+    - action: utter_faq_ppl_apply_onbehalf_comp
+
+  - rule: FAQ Uniques of SME OF
+    steps: 
+    - intent: faq_diff_of_SME_OF
+    - action: utter_faq_diff_of_SME_OF
+
+  - rule: FAQ More
+    steps: 
+    - intent: faq_more
+    - action: utter_faq_more

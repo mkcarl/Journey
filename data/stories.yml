@@ -46,11 +46,11 @@ stories:
   - intent: button_test
   - action: utter_btn_test
 
-- story: start chat 
-  steps: 
-  - intent: get_started
-  - action: utter_recommend_news
-  - action: utter_get_started
+# - story: start chat 
+#   steps: 
+#   - intent: get_started
+#   - action: utter_recommend_news
+#   - action: utter_get_started
 
 
 - story: initialte eligibility

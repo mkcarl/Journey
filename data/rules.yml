@@ -30,12 +30,54 @@ rules:
 - rule: start 
   steps: 
   - intent: get_started
+  - action: action_recommend_news
+  - action: action_remind_payment
   - action: utter_get_started
 
 - rule: loan status
   steps: 
   - intent: loan_status
   - action: action_show_loan_status
+
+- rule: list 3 faq 
+  steps: 
+  - intent: list_faq
+  - action: utter_list_faq
+
+- rule: FAQ Benefits of SME_OF
+  steps: 
+  - intent: faq_benefits
+  - action: utter_faq_benefits
+
+- rule: FAQ Doc Required
+  steps: 
+  - intent: faq_doc
+  - action: utter_faq_doc
+
+- rule: FAQ Apply Criteria
+  steps: 
+  - intent: faq_req 
+  - action: utter_faq_req
+
+- rule: FAQ What's SME OF
+  steps: 
+  - intent: faq_what's_SME_OF
+  - action: utter_faq_what's_SME_OF
+
+- rule: FAQ Who can apply on behalve Comp
+  steps: 
+  - intent: faq_ppl_apply_onbehalf_comp
+  - action: utter_faq_ppl_apply_onbehalf_comp
+
+- rule: FAQ Uniques of SME OF
+  steps: 
+  - intent: faq_diff_of_SME_OF
+  - action: utter_faq_diff_of_SME_OF
+
+- rule: FAQ More
+  steps: 
+  - intent: faq_more
+  - action: utter_faq_more
 
 # - rule: initialte eligibility
 #   steps: 

@@ -18,20 +18,54 @@ import matplotlib.pyplot as plt
 from datetime import datetime as dt
 from bs4 import BeautifulSoup
 from requests_html import HTML, HTMLSession
+import pyodbc
+import requests
+import os
 #
 
-def graph_pie(total, paid, id):
-	outstanding = total - paid
+def graph_pie(total, paid, title):
+	outstanding = float(total) - float(paid)
 	labels = ['Paid', 'Outstanding']
 	size= [paid, outstanding]
 	explode = (0, 0.1)
 	fig1, ax1 = plt.subplots()
 	ax1.pie(size, explode = explode, labels = labels, shadow=True, startangle=90)
 	ax1.axis('equal')
-	plt.legend(labels)
-	plt.imsave(f"./images/{id}")
+	plt.title(title)
+	plt.savefig("loan_status.png")
 
+def scrap_star(keyword):
+        x = []
+        session = HTMLSession()
+        r = session.get('https://www.thestar.com.my/tag/technology')
+        r.html.render()
+        soup = BeautifulSoup(r.html.html, 'lxml')
+        all_news = soup.find_all('a', {"data-content-category": "Tech/Tech News"})
+        all_newss = set(all_news)
+        for news in all_newss:
+            news_content = news['data-content-title']
+            news_link = 'https://www.thestar.com.my'+ news['href']
+            if keyword in news_content:
+                x.append(news_content)
+                x.append(news_link)
+                break
+        return x
 
+def scrap_fmt(keyword):
+    x = []
+    session = HTMLSession()
+    r = session.get('https://www.freemalaysiatoday.com/category/category/business/local-business/')
+    r.html.render()
+    soup = BeautifulSoup(r.html.html, 'lxml')
+    all_news = soup.find_all('div', {"class": "td_module_2 td_module_wrap td-animation-stack"})
+    for news in all_news:
+        news_content = news.h3.a['title']
+        news_link = news.h3.a['href']
+        if keyword in news_content:
+            x.append(news_content)
+            x.append(news_link)
+        break
+    return x
 
 class ActionHelloWorld(Action):
 
@@ -42,7 +76,6 @@ class ActionHelloWorld(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         most_recent_state = tracker.current_state()
-        print(most_recent_state["sender_id"])
         dispatcher.utter_message(
             template="utter_helloworld", 
             example_text="testing from custom action"
@@ -196,41 +229,6 @@ class ActionPrintSlot(Action):
         return []
 
 class ActionRecomendNews(Action):
-    
-    def scrap_star(self, keyword):
-        x = []
-        session = HTMLSession()
-        r = session.get('https://www.thestar.com.my/tag/technology')
-        r.html.render()
-        soup = BeautifulSoup(r.html.html, 'lxml')
-        all_news = soup.find_all('a', {"data-content-category": "Tech/Tech News"})
-        all_newss = set(all_news)
-        for news in all_newss:
-            news_content = news['data-content-title']
-            news_link = 'https://www.thestar.com.my'+ news['href']
-            if keyword in news_content:
-                x.append(news_content)
-                x.append(news_link)
-                break
-        return x
-
-    def scrap_fmt(self, keyword):
-        x = []
-        session = HTMLSession()
-        r = session.get('https://www.freemalaysiatoday.com/category/category/business/local-business/')
-        r.html.render()
-        soup = BeautifulSoup(r.html.html, 'lxml')
-        all_news = soup.find_all('div', {"class": "td_module_2 td_module_wrap td-animation-stack"})
-        for news in all_news:
-            news_content = news.h3.a['title']
-            news_link = news.h3.a['href']
-            if keyword in news_content:
-                x.append(news_content)
-                x.append(news_link)
-            break
-        return x
-
-
     def name(self) -> Text:
         return "action_recommend_news"
 
@@ -238,20 +236,20 @@ class ActionRecomendNews(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         keyword = "Bitcoin"
-        star_news = self.scrap_star(keyword)
-        fmt_news = self.scrap_fmt(keyword)
+        star_news = scrap_star(keyword)
+        fmt_news = scrap_fmt(keyword)
         
         if star_news != '':
             news = star_news.copy()
         elif fmt_news != '':
             news = fmt_news.copy()
         else:
-            return[]
+            return []
 
         dispatcher.utter_message(
-            templete="utter_recommend_news",
-            news_title= news[0],
-            news_url= news[1]
+            template="utter_recommend_news",
+            news_title= f"{news[0]}",
+            news_url= f"{news[1]}"
             )
 
         return[]
@@ -264,7 +262,51 @@ class ActionShowLoanStatus(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        token = "EAANi3q5uAokBADyrJXJT5QHnjHiJxEVLQtbVVGTCZCNs78x0T85L040iUGOenIqtXNv1dddkrfyq6xDZBoJkHjIcKcVpVZArnBBZCqHGV49DZAvZCbBYfTys47KeOtqoQFhGINZAk7obbSE8ZAvuxbhlDWYHrxnY01USsm1CF1OQ1oiO7sZA2xQjO"
+        most_recent_state = tracker.current_state()
+        usr = most_recent_state['sender_id']
+        user_info = requests.get(f'https://graph.facebook.com/{usr}?fields=id,name&access_token={token}')
 
-        
+        con_string = r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=./RHBSME.accdb;'
+        connect = pyodbc.connect(con_string)
+        cursor = connect.cursor()
+        cursor.execute(f'SELECT loan_amount, loan_duration, loan_amount_paid, loan_amount*((100+loan_interest_rate)/100) AS compounded_loan_amount FROM Loan WHERE bus_id = \'bus00001\'')
+        rows = cursor.fetchall()[0]
+
+        # graph_pie(rows[3], rows[0], f"Loan status for{user_info['name']}")
+
+
+        dispatcher.utter_message(
+            text="Your current loan status is as shown: \n"\
+                 f"Total payable : {float(rows[3])} \nPaid : {float(rows[2])}", 
+            image="https://storage.googleapis.com/savvy-nature-308708-discord/123.png"
+            )
+
+        return []
+
+class ActionRemindPayment(Action):
+
+    def name(self) -> Text:
+        return "action_remind_payment"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        con_string = r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=./RHBSME.accdb;'
+        connect = pyodbc.connect(con_string)
+        cursor = connect.cursor()
+        cursor.execute(f'SELECT loan_payment_date FROM Loan WHERE bus_id = \'bus00001\'')
+        rows = cursor.fetchall()[0]
+        due = rows[0]
+        now = dt.now()
+        diff = due - now
+
+        if diff.days < 7: 
+            dispatcher.utter_message(
+                text=f"Reminder: You have {diff.days} days left until your next loan payment.")
+
+
+
 
         return []
