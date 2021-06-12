@@ -1,0 +1,96 @@
+version: "2.0"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+
+- story: loan path 
+  steps: 
+  - intent: greet
+  - action: utter_greet
+  - intent: loan
+  - action: utter_loan
+
+- story: hello world 
+  steps: 
+  - intent: helloworld
+  - action: action_hello_world
+
+- story: shw btn 
+  steps: 
+  - intent: button_test
+  - action: utter_btn_test
+
+- story: start chat 
+  steps: 
+  - intent: get_started
+  - action: utter_recommend_news
+  - action: utter_get_started
+
+
+- story: initialte eligibility
+  steps: 
+    - intent: check_eligibility
+    - action: utter_eligibility_buss_sec
+    - intent: give_business_sector
+    - action: action_eligibility_buss_sec
+
+    - action: utter_eligibility_operation
+    - intent: give_yes_no
+    - action: action_eligibility_operation
+
+    - action: utter_eligibility_ann_rev
+    - intent: give_number
+    - action: action_eligibility_ann_rev
+
+    - action: utter_eligibility_facility
+    - intent: give_yes_no
+    - action: action_eligibility_facility
+
+    - action: utter_eligibility_shareholder
+    - intent: give_yes_no
+    - action: action_eligibility_shareholder
+
+    - action: utter_eligibility_foreign
+    - intent: give_yes_no
+    - action: action_eligibility_foreign
+
+    - action: utter_eligibility_guarantor_age
+    - intent: give_yes_no
+    - action: action_eligibility_guarantor_age
+
+    - action: utter_eligibility_partnership
+    - intent: give_yes_no
+    - action: action_eligibility_partnership
+
+    - action: utter_eligibility_immediate
+    - intent: give_yes_no
+    - action: action_eligibility_immediate
+
+    - action: action_print_slot
+    - action: utter_eligibility_result

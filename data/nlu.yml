@@ -1,0 +1,157 @@
+version: "2.0"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+
+- intent: goodbye
+  examples: |
+    - good afternoon
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+# - intent: affirm
+#   examples: |
+#     - yes
+#     - y
+#     - indeed
+#     - of course
+#     - that sounds good
+#     - correct
+
+# - intent: deny
+#   examples: |
+#     - no
+#     - n
+#     - never
+#     - I don't think so
+#     - don't like that
+#     - no way
+#     - not really
+
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
+
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+- intent: loan 
+  examples: |
+    - Am I eligible for a loan? 
+    - Loan 
+    - Business loan
+  
+- intent: helloworld
+  examples: |
+    - Hello world
+
+- intent: button_test 
+  examples: |
+    - test button
+
+- intent: loan_status 
+  examples: |
+    - Check loan status 
+    - loan status 
+    - What is my loan status? 
+    - How much have I paid for the loan? 
+
+- intent: application_status 
+  examples: |
+    - Check application status 
+    - application status
+    - What is my loan application status? 
+    - How is my loan application status? 
+
+- intent: check_eligibility 
+  examples: |
+    - Check loan eligibility
+    - Am I eligible for business loan? 
+    - How to register a loan? 
+
+- intent: loan_application
+  
+- intent: get_started
+  examples: |
+   - Get started
+   - start 
+   - begin
+
+- intent: give_business_sector
+  examples: |
+    - Service
+    - Retail 
+    - Manufacturing 
+
+- intent: give_yes_no
+  examples: |
+    - Yes
+    - Ye
+    - Yup 
+    - No
+    - Nay
+
+- intent: give_number
+  examples: |
+    - 0
+    - 1000
+    - 324957
+    - 934885
+    - 400000
+
+- intent: 

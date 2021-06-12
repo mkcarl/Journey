@@ -1,0 +1,22 @@
+## Getting started 
+User    : Get started !
+Bot     : Hi, my name is Journey. What can I help you? 
+        -> Check loan eligibility 
+        -> Apply business loan 
+        -> Check loan status 
+        -> Check application status
+
+User    : Check loan eligibility 
+Bot     : 
+
+User    : Apply business loan 
+Bot     : Before applying for a business loan, we need to check if you're eligible for it. 
+          
+User    : Check loan status 
+Bot     : Welcome back, {username}. Your current loan status is as shown :  
+            Total   : 100,000
+            Paid    : 50,000
+            *Chart*
+
+User    : Check application status 
+Bot     : Hello there, {username}. The status for your loan application is : {status}            

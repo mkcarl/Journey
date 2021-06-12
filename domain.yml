@@ -1,0 +1,255 @@
+version: "2.0"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - loan
+  - helloworld
+  - button_test
+  - loan_status 
+  - application_status 
+  - check_eligibility
+  - loan_application
+  - get_started
+  - give_number
+  - give_yes_no
+  - give_business_sector
+
+actions: 
+  - action_hello_world
+  - action_eligibility_buss_sec
+  - action_eligibility_operation
+  - action_eligibility_ann_rev
+  - action_eligibility_facility
+  - action_eligibility_shareholder
+  - action_eligibility_foreign
+  - action_eligibility_guarantor_age
+  - action_eligibility_partnership
+  - action_eligibility_immediate
+  - action_print_slot
+  - action_recommend_news
+
+
+slots: 
+  buss_sec:
+    type: text
+    initial_value: none
+  operation: 
+    type: text 
+    initial_value: none
+  ann_rev:
+    type: text 
+    initial_value: none
+  facility: 
+    type: text
+    initial_value: none
+  shareholder: 
+    type: text
+    initial_value: none
+  foreign:
+    type: text
+    initial_value: none
+  guarantor_age:
+    type: text
+    initial_value: none
+  partnership:
+    type: text
+    initial_value: none
+  immediate:
+    type: text
+    initial_value: none
+
+# forms: 
+#   eligibility_form:
+#       required_slots: 
+#           buss_sec:
+#             - type: from_text
+#           operation: 
+#             - type: from_text 
+#           ann_rev:
+#             - type: from_text 
+#           facility: 
+#             - type: from_text
+#           shareholder: 
+#             - type: from_text
+#           foreign:
+#             - type: from_text
+#           guarantor_age:
+#             - type: from_text
+#           partnership:
+#             - type: from_text
+#           immediate:
+#             - type: from_text
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+  utter_loan: 
+  - text: "I will guide you through the process"
+
+  utter_helloworld:
+  - text: "this is a hello world example : {example_text}"
+
+  utter_btn_test: 
+  - text: "This is for testing buttons"
+    elements: 
+      - title: Test
+        subtitle: this is for testing purposes
+        buttons: 
+          - title: Btn 1 
+            payload: helloworld
+          - title: Btn 2 
+            payload: loan
+  
+  utter_loan_status: 
+    - text: "Welcome back, {username}. Your current loan status is : \nTotal  : {total_loan_amount} \nPaid   : {total_paid_amont}"
+
+  utter_get_started: 
+    - text: "Hi, my name is Journey. What can I help you with?"
+      elements: 
+        - title: Start 
+          subtitle: Start
+          buttons: 
+            - title: "Check loan eligibility"
+              payload: check_eligibility 
+            - title: "Apply business loan"
+              payload: loan_application 
+            - title: "Check loan status"
+              payload: loan_status 
+            # - title: "Check applications status "
+            #   payload: application_status 
+
+  utter_eligibility_buss_sec: 
+    - text: "What is your Bussiness sector?"
+      elements: 
+        - title: Question
+          subtitle: Please answer truthfully
+          buttons:
+
+            - title: "Service"
+              payload: "Service"
+            - title: "Retail"
+              payload: "Retail"
+            - title: "Manufacturing"
+              payload: "Manufacturing"
+
+
+  utter_eligibility_operation: 
+    - text: "Has your company been in operation for at least 1 year or at least 2 years if you are applying for RHB BizPower Relief Financing?"
+      elements: 
+        - title: Question
+          subtitle: Please answer truthfully
+          buttons:
+            - title: "Yes"
+              payload: "Yes"
+            - title: "No"
+              payload: "No"
+
+  utter_eligibility_ann_rev:
+    - text: "Your company annual revenue for the latest financial year?"
+
+  utter_eligibility_facility: 
+    - text: "This facility will be used as working capital needs"
+      elements: 
+        - title: Question
+          subtitle: Please answer truthfully
+          buttons:
+            - title: "Yes"
+              payload: "Yes"
+            - title: "No"
+              payload: "No"
+
+  utter_eligibility_shareholder: 
+    - text: "Do you have any corporate or foreign shareholders holding more than 50% shares in your company?"
+      elements: 
+        - title: Question
+          subtitle: Please answer truthfully
+          buttons:
+            - title: "Yes"
+              payload: "Yes"
+            - title: "No"
+              payload: "No"
+
+  utter_eligibility_foreign: 
+    - text: "Do you have any foreign director in the company?"
+      elements: 
+        - title: Question
+          subtitle: Please answer truthfully
+          buttons:
+            - title: "Yes"
+              payload: "Yes"
+            - title: "No"
+              payload: "No"
+
+  utter_eligibility_guarantor_age: 
+    - text: "Is your youngest guarantor below 69 years old?"
+      elements: 
+        - title: Question
+          subtitle: Please answer truthfully 
+          buttons: 
+            - title: "Yes"
+              payload: "Yes"
+            - title: "No"
+              payload: "No"
+
+  utter_eligibility_partnership: 
+    - text: "Are all your directors acting as your company’s guarantors? If your company is a sole-proprietorship or partnership, please indicate 'Yes' to confirm your understanding that sole-proprietor or partner(s) will have unlimited liability over debt owes(s) to the Bank?"
+      elements: 
+        - title: Question
+          subtitle: Please answer truthfully
+          buttons:
+            - title: "Yes"
+              payload: "Yes"
+            - title: "No"
+              payload: "No"
+
+  utter_eligibility_immediate: 
+    - text: "Do you or your guarantor(s) have any immediate family or close relatives (including parents, brother/sister and their spouses, dependent's spouse and own/step/adopted child) that are employees of RHB Banking Group?"
+      elements: 
+        - title: Question
+          subtitle: Please answer truthfully
+          buttons:
+            - title: "Yes"
+              payload: "Yes"
+            - title: "No"
+              payload: "No"
+    
+  utter_eligibility_result: 
+    - text: "Congrats, you may proceed with the loan application. Please download the RHB Financing (SME) Mobile App for a smoother application process!"
+    - text: "Sorry to inform that you are not currently eligible to apply for the loan."
+
+  utter_recommend_news: 
+    - text: "Hey, you might find this article interesting : \n*{news_title}* \nRead more from : {news_url}"
+    - text: "Nice to meet you again. \n Hey, are you aware on {news_title} \n Know more from: {news_url}"
+
+  utter_
+
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+
+# TODO : utter_eligibility_result, utter_recommend_news chage to action 

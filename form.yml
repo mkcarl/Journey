@@ -1,0 +1,82 @@
+utter_eligibility_buss_sec: 
+  - text: "Bussiness sector"
+    custom:
+      payload: dropDown
+      data:
+      - label: Agriculture
+        value: "/inform{'slot_name':'Agriculture'}"
+      - label: Construction
+        value: "/inform{'slot_name':'Construction'}"
+      - label: Retail
+        value: "/inform{'slot_name':'Retail'}"
+      - label: Manufacturing
+        value: "/inform{'slot_name':'Manufacturing'}"
+      - label: Service
+        value: "/inform{'slot_name':'Service'}"
+
+utter_eligibility_operation: 
+  - text: "Has your company been in operation for at least 1 year or at least 2 years if you are applying for RHB BizPower Relief Financing?"
+    elements: 
+      - buttons: 
+          - title: "Yes"
+            payload: "Yes"
+          - title: "No"
+            payload: "No"
+
+utter_eligibility_ann_rev:
+  - text: "Company annual revenue for the latest financial year"
+
+utter_eligibility_facility: 
+  - text: "This facility will be used as working capital needs"
+    elements: 
+      - buttons: 
+          - title: "Yes"
+            payload: "Yes"
+          - title: "No"
+            payload: "No"
+
+utter_eligibility_shareholder: 
+  - text: "Do you have any corporate or foreign shareholders holding more than 50% shares in your company?"
+    elements: 
+      - buttons: 
+          - title: "Yes"
+            payload: "Yes"
+          - title: "No"
+            payload: "No"
+
+utter_eligibility_foreign: 
+  - text: "Do you have any foreign director in the company?"
+    elements: 
+      - buttons: 
+          - title: "Yes"
+            payload: "Yes"
+          - title: "No"
+            payload: "No"
+
+utter_eligibility_guarantor_age: 
+  - text: "Is your youngest guarantor below 69 years old?"
+    elements: 
+      - buttons: 
+          - title: "Yes"
+            payload: "Yes"
+          - title: "No"
+            payload: "No"
+
+utter_eligibility_partnership: 
+  - text: "Are all your directors acting as your company’s guarantors? If your company is a sole-proprietorship or partnership, please indicate "Yes" to confirm your understanding that sole-proprietor or partner(s) will have unlimited liability over debt owes(s) to the Bank?"
+    elements: 
+      - buttons: 
+          - title: "Yes"
+            payload: "Yes"
+          - title: "No"
+            payload: "No"
+
+utter_eligibility_immediate: 
+  - text: "Do you or your guarantor(s) have any immediate family or close relatives (including parents, brother/sister and their spouses, dependent's spouse and own/step/adopted child) that are employees of RHB Banking Group?"
+    elements: 
+      - buttons: 
+          - title: "Yes"
+            payload: "Yes"
+          - title: "No"
+            payload: "No"
+
