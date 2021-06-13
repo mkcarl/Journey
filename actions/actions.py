@@ -17,7 +17,7 @@ import json
 import matplotlib.pyplot as plt
 from datetime import datetime as dt
 from bs4 import BeautifulSoup
-from requests_html import HTML, HTMLSession
+from requests_html import HTML, HTMLSession, AsyncHTMLSession
 import pyodbc
 import requests
 import os
@@ -262,7 +262,7 @@ class ActionShowLoanStatus(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        token = "EAANi3q5uAokBADyrJXJT5QHnjHiJxEVLQtbVVGTCZCNs78x0T85L040iUGOenIqtXNv1dddkrfyq6xDZBoJkHjIcKcVpVZArnBBZCqHGV49DZAvZCbBYfTys47KeOtqoQFhGINZAk7obbSE8ZAvuxbhlDWYHrxnY01USsm1CF1OQ1oiO7sZA2xQjO"
+        token = "EAANi3q5uAokBAPfH1MSYm3uKqMOyBNAFssP8OaUxWEEdFfscOGoDmDDSbFInybuQuQ8NoLIcA8ivJsCeZBEZB7tzTYTZCJ4EZBYKw2FxqtiqzUzO73V6R90UwjuKvqgCpcTGrJdrWBiNmYvIvxiZBYvcZB2PFGNOxuowcpm9ExbyEDMMZCd7aHe"
         most_recent_state = tracker.current_state()
         usr = most_recent_state['sender_id']
         user_info = requests.get(f'https://graph.facebook.com/{usr}?fields=id,name&access_token={token}')
@@ -278,7 +278,7 @@ class ActionShowLoanStatus(Action):
 
         dispatcher.utter_message(
             text="Your current loan status is as shown: \n"\
-                 f"Total payable : {float(rows[3])} \nPaid : {float(rows[2])}", 
+                 f"Total payable : RM {float(rows[3])} \nPaid : RM {float(rows[2])} \nLoan duration : {int(rows[1])} months", 
             image="https://storage.googleapis.com/savvy-nature-308708-discord/123.png"
             )
 
@@ -308,5 +308,41 @@ class ActionRemindPayment(Action):
 
 
 
+        connect.close()
+        return []
 
+class ActionAnniversary(Action):
+
+    def name(self) -> Text:
+        return "action_anniversary"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        con_string = r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=./RHBSME.accdb;'
+        connect = pyodbc.connect(con_string)
+        cursor = connect.cursor()
+        cursor.execute(f'SELECT bus_incorperation_date FROM Business WHERE bus_id = \'bus00001\'')
+        rows = cursor.fetchall()[0]
+        anni_date = rows[0]
+        now = dt.now()
+        diff = anni_date - now
+
+        token = "EAANi3q5uAokBAPfH1MSYm3uKqMOyBNAFssP8OaUxWEEdFfscOGoDmDDSbFInybuQuQ8NoLIcA8ivJsCeZBEZB7tzTYTZCJ4EZBYKw2FxqtiqzUzO73V6R90UwjuKvqgCpcTGrJdrWBiNmYvIvxiZBYvcZB2PFGNOxuowcpm9ExbyEDMMZCd7aHe"
+        most_recent_state = tracker.current_state()
+        usr = most_recent_state['sender_id']
+        user_info = requests.get(f'https://graph.facebook.com/{usr}?fields=id,name&access_token={token}').json()
+
+
+        if diff.days < 0: 
+            dispatcher.utter_message(
+            template="utter_anniversary",
+            comp_name=f"{user_info['name']}" , 
+            date=f"{anni_date.strftime('%m/%d/%Y')}"      
+                )
+
+
+
+        connect.close()
         return []

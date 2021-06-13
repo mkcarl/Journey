@@ -31,12 +31,13 @@ rules:
   steps: 
   - intent: get_started
   - action: action_recommend_news
-  - action: action_remind_payment
+  - action: action_anniversary
   - action: utter_get_started
 
 - rule: loan status
   steps: 
   - intent: loan_status
+  - action: action_remind_payment
   - action: action_show_loan_status
 
 - rule: list 3 faq 

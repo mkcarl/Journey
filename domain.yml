@@ -43,6 +43,7 @@ actions:
   - action_recommend_news
   - action_show_loan_status
   - action_remind_payment
+  - action_anniversary
 
 
 slots: 
@@ -111,7 +112,7 @@ responses:
   - text: "Great, carry on!"
 
   utter_goodbye:
-  - text: "Bye"
+  - text: "Bye-bye. Have a nice day"
 
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
@@ -294,6 +295,9 @@ responses:
               payload: utter_faq_benefits
             - title: "More"
               payload: faq_more
+    
+  utter_anniversary:
+    - text: Happy anniversary, {comp_name}, Your business was founded back in {date}. May your business grow and brings you prosperity.
 
 
 session_config:
